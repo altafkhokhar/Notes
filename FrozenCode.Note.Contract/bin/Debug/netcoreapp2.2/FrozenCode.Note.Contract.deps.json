@@ -1,0 +1,23 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v2.2",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v2.2": {
+      "FrozenCode.Note.Contract/1.0.0": {
+        "runtime": {
+          "FrozenCode.Note.Contract.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "FrozenCode.Note.Contract/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

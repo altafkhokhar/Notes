@@ -1,0 +1,11 @@
+D:\Altaf\FrozenCode\DEMO\FrozenCode.Note.Service\bin\Debug\netcoreapp3.0\FrozenCode.Note.Service.deps.json
+D:\Altaf\FrozenCode\DEMO\FrozenCode.Note.Service\bin\Debug\netcoreapp3.0\FrozenCode.Note.Service.dll
+D:\Altaf\FrozenCode\DEMO\FrozenCode.Note.Service\bin\Debug\netcoreapp3.0\FrozenCode.Note.Contract.dll
+D:\Altaf\FrozenCode\DEMO\FrozenCode.Note.Service\bin\Debug\netcoreapp3.0\FrozenCode.Note.Contract.pdb
+D:\Altaf\FrozenCode\DEMO\FrozenCode.Note.Service\obj\Debug\netcoreapp3.0\FrozenCode.Note.Service.csprojAssemblyReference.cache
+D:\Altaf\FrozenCode\DEMO\FrozenCode.Note.Service\obj\Debug\netcoreapp3.0\FrozenCode.Note.Service.AssemblyInfoInputs.cache
+D:\Altaf\FrozenCode\DEMO\FrozenCode.Note.Service\obj\Debug\netcoreapp3.0\FrozenCode.Note.Service.AssemblyInfo.cs
+D:\Altaf\FrozenCode\DEMO\FrozenCode.Note.Service\obj\Debug\netcoreapp3.0\FrozenCode.Note.Service.csproj.CopyComplete
+D:\Altaf\FrozenCode\DEMO\FrozenCode.Note.Service\bin\Debug\netcoreapp3.0\FrozenCode.Note.Service.pdb
+D:\Altaf\FrozenCode\DEMO\FrozenCode.Note.Service\obj\Debug\netcoreapp3.0\FrozenCode.Note.Service.dll
+D:\Altaf\FrozenCode\DEMO\FrozenCode.Note.Service\obj\Debug\netcoreapp3.0\FrozenCode.Note.Service.pdb
