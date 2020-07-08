@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Claims;
-using System.Threading.Tasks;
+﻿
 using FrozenCode.Note.Contract.DTO;
 using FrozenCode.Note.Contract.Services;
 using FrozenCode.Note.Service;
@@ -61,7 +57,7 @@ namespace FrozenCode.Note.API.Controllers
         [AllowAnonymous]
         [HttpDelete]
         [Route("DeleteNote")]//  api/notes/DeleteNote
-        public IActionResult DeleteNote([FromBody]int noteId)
+        public IActionResult DeleteNote([FromQuery]int noteId)
         {
             string message = string.Empty;
 
@@ -73,7 +69,7 @@ namespace FrozenCode.Note.API.Controllers
             return Ok(true);
         }
 
-        
+        [AllowAnonymous]
         [HttpGet]
         [Route("GetNote")]//  api/notes/GetNote
         public IActionResult GetNote([FromQuery]int noteId)
@@ -86,6 +82,19 @@ namespace FrozenCode.Note.API.Controllers
                 return BadRequest(new { message = "Invalid note!" });
 
             return Ok(readNote);
+        }
+
+        [AllowAnonymous]
+        [HttpGet]
+        [Route("GetAllNotes")]//  api/notes/GetNote
+        public IActionResult GetAllNotes()
+        {
+            string message = string.Empty;
+
+            var notes = _noteService.GetAll().Result;
+
+
+            return Ok(notes);
         }
     }
 }

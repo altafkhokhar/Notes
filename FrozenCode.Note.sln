@@ -5,9 +5,9 @@ VisualStudioVersion = 16.0.29519.87
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FrozenCode.Note.API", "FrozenCode.Note\FrozenCode.Note.API.csproj", "{07451A6A-3175-49B4-94E4-C715D8ABD855}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FrozenCode.Note.Contract", "FrozenCode.Note.Contract\FrozenCode.Note.Contract.csproj", "{668129AE-2CB2-46BF-8377-84BEFFA2AF23}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FrozenCode.Note.Contract", "FrozenCode.Note.Contract\FrozenCode.Note.Contract.csproj", "{668129AE-2CB2-46BF-8377-84BEFFA2AF23}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FrozenCode.Note.Service", "FrozenCode.Note.Service\FrozenCode.Note.Service.csproj", "{7860DCDD-7694-4275-B44E-8702BCE987C0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FrozenCode.Note.Service", "FrozenCode.Note.Service\FrozenCode.Note.Service.csproj", "{7860DCDD-7694-4275-B44E-8702BCE987C0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

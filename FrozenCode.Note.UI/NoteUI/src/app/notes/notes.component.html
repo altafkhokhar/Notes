@@ -1,0 +1,47 @@
+<p>NOTES</p>
+<!-- Three columns -->
+
+
+<div class="flex mb-4">
+  <div class="w-1/5 bg-gray-400 h-12">TITLE</div>
+  <div class="w-full bg-gray-500 h-12">DESCRIPTION</div>
+
+  <div class="w-1/5 bg-gray-400 h-12">ACTION</div>
+</div>
+  
+
+<br />
+<div class="flex mb-4" *ngFor="let note of service.list">
+  <div class="w-1/5 bg-gray-400 h-12">{{note.title}}</div>
+  <div class="w-full bg-gray-500 h-12">{{note.description}}</div>
+
+  <div class="w-1/5 bg-gray-400 h-12">
+    
+    <div class="flex">
+      <div class="w-1/6 bg-gray-400 h-12">
+
+        <i class="fa fa-share-alt" aria-hidden="true"></i>
+
+      </div>
+      <div class="w-1/6 bg-gray-500 h-12">
+        <span >
+          <button (click)="goToList(note.id)">
+            <i class="fa fa-edit" aria-hidden="true"></i>
+
+          </button>
+        </span>
+      </div>
+
+      <div class="w-1/6 bg-gray-400 h-12" >
+        <button (click)="deleteNote(note.id)">
+          <i class="fa fa-remove" aria-hidden="true"></i>
+        </button>
+
+      </div>
+
+    </div>
+    </div>
+
+</div>
+
+ 

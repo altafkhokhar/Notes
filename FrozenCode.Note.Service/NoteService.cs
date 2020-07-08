@@ -26,7 +26,10 @@ namespace FrozenCode.Note.Service
                                  select notes).FirstOrDefault();
             if (noteTobeDelete != null)
             {
-                context.Notes.Remove(noteTobeDelete);
+                var note = context.Notes.Where(wh => wh.Id == noteTobeDelete.Id).FirstOrDefault() ;
+                var sharing = context.NoteSharing.Where(wh => wh.NoteId == note.Id).ToList();
+                context.NoteSharing.RemoveRange(sharing);
+                context.Notes.Remove(note);
                 context.SaveChangesAsync();
                 return true;
             }
@@ -56,7 +59,7 @@ namespace FrozenCode.Note.Service
 
         public Task<List<NoteDTO>> GetAll()
         {
-            var result =  context.Notes.Select(sel => new NoteDTO { Title = sel.Title, Description = sel.Description, Content = sel.Content }).ToListAsync();
+            var result =  context.Notes.Select(sel => new NoteDTO {Id = sel.Id, Title = sel.Title, Description = sel.Description, Content = sel.Content }).ToListAsync();
             return result;
         }
 
@@ -65,12 +68,12 @@ namespace FrozenCode.Note.Service
             var noteTobeRead = (from notes in context.Notes
                                 join noteSharing in context.NoteSharing
                                 on notes.Id equals noteSharing.NoteId
-                                where noteSharing.UserId == userId && noteSharing.Read
+                                where noteSharing.UserId == userId && noteSharing.Read && notes.Id == noteId
                                 select notes).FirstOrDefault();
 
             if (noteTobeRead != null)
             {
-                return new NoteDTO { Id = noteTobeRead.Id, Title = noteTobeRead.Title, Content = noteTobeRead.Content };
+                return new NoteDTO { Id = noteTobeRead.Id, Title = noteTobeRead.Title, Description = noteTobeRead.Description, Content = noteTobeRead.Content };
             }
 
             return null;
