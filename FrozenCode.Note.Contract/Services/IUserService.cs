@@ -9,6 +9,7 @@ namespace FrozenCode.Note.Contract.Services
     {
             UserDTO Authenticate(ref UserDTO registeredUser);
             Task<List<UserDTO>> GetAll();
+            Task<List<UserDTO>> Search(string searchText);
             bool TryRegister(ref RegisterUserDTO newUser);
         
     }

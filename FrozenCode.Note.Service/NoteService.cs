@@ -104,6 +104,25 @@ namespace FrozenCode.Note.Service
             return true;
         }
 
-       
+        public bool UpdateNoteRightsForUser(UserNoteRightsDTO userNoteRight)
+        {
+            var noteRights = context.NoteSharing.Where(wh => wh.NoteId == userNoteRight.NoteId && wh.UserId == userNoteRight.UserId).FirstOrDefault();
+            if (noteRights != null)
+            {
+               
+                    noteRights.Share = userNoteRight.CanShare;
+                noteRights.Delete = userNoteRight.CanDelete;                
+                    noteRights.Edit = userNoteRight.CanEdit;
+                    noteRights.Read = userNoteRight.CanRead;
+
+                context.SaveChangesAsync();
+                return true;
+            }
+
+            
+
+            return false;
+
+        }
     }
 }

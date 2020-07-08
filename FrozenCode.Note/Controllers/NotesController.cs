@@ -96,5 +96,18 @@ namespace FrozenCode.Note.API.Controllers
 
             return Ok(notes);
         }
+
+        [AllowAnonymous] //todo
+        [HttpPost]
+        [Route("UpdateNoteRights")]//  api/notes/GetNote
+        public IActionResult UpdateNoteRights([FromBody]UserNoteRightsDTO userNoteRightDTo)
+        {
+            string message = string.Empty;
+
+            var result = _noteService.UpdateNoteRightsForUser(userNoteRightDTo);
+
+
+            return Ok(result);
+        }
     }
 }

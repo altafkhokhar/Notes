@@ -15,3 +15,20 @@ export interface INoteDetail {
     Content: string;
     
 }
+
+
+export class User implements IUser {
+    Id: string;
+    UserName: string;
+    Email: string;
+
+}
+
+export interface IUser {
+
+    Id: string;
+    UserName: string;
+    Email: string;
+   
+
+}

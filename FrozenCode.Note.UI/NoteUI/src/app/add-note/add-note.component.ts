@@ -16,7 +16,7 @@ import { parse } from 'url';
 })
 export class AddNoteComponent implements OnInit {
 
-    private noteId?: number;
+   noteId?: number;
    noteForm = this.fb.group({
        Title: ['', Validators.required],
        Description: [''],
@@ -51,5 +51,4 @@ export class AddNoteComponent implements OnInit {
         this.noteForm.patchValue({ Title: objNote.title, Description: objNote.description, Content : objNote.content });
             
     }
-
 }

@@ -5,3 +5,4 @@ D:\Altaf\FrozenCode\DEMO\FrozenCode.Note.Contract\obj\Debug\netcoreapp2.2\Frozen
 D:\Altaf\FrozenCode\DEMO\FrozenCode.Note.Contract\obj\Debug\netcoreapp2.2\FrozenCode.Note.Contract.AssemblyInfo.cs
 D:\Altaf\FrozenCode\DEMO\FrozenCode.Note.Contract\obj\Debug\netcoreapp2.2\FrozenCode.Note.Contract.dll
 D:\Altaf\FrozenCode\DEMO\FrozenCode.Note.Contract\obj\Debug\netcoreapp2.2\FrozenCode.Note.Contract.pdb
+D:\Altaf\FrozenCode\DEMO\FrozenCode.Note.Contract\obj\Debug\netcoreapp2.2\FrozenCode.Note.Contract.csprojAssemblyReference.cache

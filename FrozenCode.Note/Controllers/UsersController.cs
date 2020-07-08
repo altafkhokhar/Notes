@@ -66,6 +66,15 @@ namespace WebApi.Controllers
             return Ok(users.Result);
         }
 
+        [AllowAnonymous] //todo
+        [HttpGet]
+        [Route("Search")] //Users/Search
+        public IActionResult Search([FromQuery] string searchText)
+        {
+            var users = _userService.Search(searchText.Trim().ToLowerInvariant());
+            return Ok(users.Result);
+        }
+
         private UserDTO GenerateUserWithToken(UserDTO registeredUser)
         {
             // authentication successful so generate jwt token

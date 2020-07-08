@@ -62,6 +62,11 @@ namespace FrozenCode.Note.Service
             return result;
         }
 
-        
+        public Task<List<UserDTO>> Search(string searchText)
+        {
+            var result = dbContext.Users.Where(wh => wh.UserName.Contains(searchText) || wh.Email.Contains(searchText))
+            .Select(sel => new UserDTO {Id = sel.Id, UserName = sel.UserName, Email = sel.Email }).ToListAsync();
+            return result;
+        }
     }
 }

@@ -16,6 +16,8 @@ namespace FrozenCode.Note.Contract.Services
 
         bool Edit(ref CreateNoteDTO note, int userId);
 
-        NoteDTO GetNote(int noteId,int userId);
+        NoteDTO GetNote(int noteId, int userId);
+
+        bool UpdateNoteRightsForUser(UserNoteRightsDTO userNoteRight);
     }
 }

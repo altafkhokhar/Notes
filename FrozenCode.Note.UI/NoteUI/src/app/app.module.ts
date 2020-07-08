@@ -9,6 +9,8 @@ import { AppComponent } from './app.component';
 import { NotesComponent } from './notes/notes.component';
 import { AddNoteComponent } from './add-note/add-note.component';
 import { ToolBarComponent } from './tool-bar/tool-bar.component';
+import { NoteShareComponent } from './note-share/note-share.component';
+
 
 
 
@@ -18,7 +20,8 @@ import { ToolBarComponent } from './tool-bar/tool-bar.component';
     AppComponent,
     NotesComponent,
     AddNoteComponent,
-    ToolBarComponent
+    ToolBarComponent,
+    NoteShareComponent
   ],
   imports: [
     BrowserModule,

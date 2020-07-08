@@ -3,15 +3,17 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { ActivatedRouteSnapshot, Router } from '@angular/router';
 
 import { iApiResult } from "../shared/iApiResult";
-import { NoteDetail, INoteDetail } from '../shared/note-detail.model';
+import { NoteDetail, INoteDetail, User, IUser } from '../shared/note-detail.model';
 import { FormGroup } from '@angular/forms';
-import { Subscribable } from 'rxjs';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class NoteService {
     readonly rootURL = 'http://localhost:50210/api/Notes/';
+
+    readonly userRootURL = 'http://localhost:50210/api/Users/';
 
     list: NoteDetail[];
     result: iApiResult<NoteDetail[]>;
@@ -53,5 +55,22 @@ export class NoteService {
 
     getNote(noteId: number): Promise<NoteDetail> {
         return this.httpClient.get < NoteDetail>(this.rootURL + 'GetNote?noteId=' + noteId).toPromise<NoteDetail>();
+    }
+
+    searchUsers(searchText: string): Promise<any> {
+        return this.httpClient.get<any>(this.userRootURL + 'Search?searchText=' + searchText).toPromise<any>();
+    }
+
+    getAllusers(): Promise<any> {
+        return this.httpClient.get<any>(this.userRootURL + 'GetAllUsers').toPromise<any>();
+    }
+
+    updateNoteRightsForUser(userNoteRightDTo) {
+        this.httpClient.post(this.rootURL + 'UpdateNoteRights', userNoteRightDTo).toPromise()
+            .then(res => {
+               
+                alert('Record Saved Successfully!');
+               
+            })
     }
 }
