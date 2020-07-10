@@ -14,10 +14,10 @@
   </ItemGroup>
   <ItemGroup>
     <Reference Include="FrozenCode.Note.Contract">
-      <HintPath>..\FrozenCode.Note.Contract\bin\Debug\netcoreapp2.2\FrozenCode.Note.Contract.dll</HintPath>
+      <HintPath>..\BIinaries\netcoreapp2.2\FrozenCode.Note.Contract.dll</HintPath>
     </Reference>
     <Reference Include="FrozenCode.Note.Service">
-      <HintPath>..\FrozenCode.Note.Service\bin\Debug\netcoreapp2.2\FrozenCode.Note.Service.dll</HintPath>
+      <HintPath>..\BIinaries\netcoreapp2.2\FrozenCode.Note.Service.dll</HintPath>
     </Reference>
   </ItemGroup>
 </Project>

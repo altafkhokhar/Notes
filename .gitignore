@@ -13,6 +13,14 @@
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
 
+BIinaries
+FrozenCode.Note.Contract/obj
+FrozenCode.Note.Contract/bin
+*/**/bin/Debug
+*/**/bin/Release
+*/**/obj/Debug
+*/**/obj/Release
+
 # Build results
 [Dd]ebug/
 [Dd]ebugPublic/
