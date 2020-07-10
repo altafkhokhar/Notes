@@ -25,7 +25,7 @@
       </div>
       <div class="w-1/6 bg-gray-500 h-12">
         <span >
-          <button (click)="goToList(note.id)">
+          <button *ngIf="note.canEdit" (click)="goToList(note.id)">
             <i class="fa fa-edit" aria-hidden="true"></i>
 
           </button>
@@ -33,7 +33,7 @@
       </div>
 
       <div class="w-1/6 bg-gray-400 h-12" >
-        <button (click)="deleteNote(note.id)">
+        <button *ngIf="note.canDelete" (click)="deleteNote(note.id)">
           <i class="fa fa-remove" aria-hidden="true"></i>
         </button>
 

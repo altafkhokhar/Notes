@@ -9,15 +9,17 @@ namespace FrozenCode.Note.Contract.Services
     public interface INoteService
     {
        
-        Task<List<NoteDTO>> GetAll();
+        Task<List<GridNoteDetailDTO>> GetAll(int userId);
         bool TryCreateNote(ref CreateNoteDTO newNote, int userId);
 
         bool Delete(int noteId, int userId);
 
-        bool Edit(ref CreateNoteDTO note, int userId);
+        bool Edit(CreateNoteDTO note, int userId);
 
         NoteDTO GetNote(int noteId, int userId);
 
         bool UpdateNoteRightsForUser(UserNoteRightsDTO userNoteRight);
+
+        bool UnShareNoteWithAll(int noteId, int userId);
     }
 }

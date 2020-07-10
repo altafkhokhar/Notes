@@ -7,7 +7,7 @@ import { User } from '../shared/note-detail.model';
 @Component({
   selector: 'app-note-share',
   templateUrl: './note-share.component.html',
-  styleUrls: ['./note-share.component.css']
+    styleUrls: ['./note-share.component.css']
 })
 export class NoteShareComponent implements OnInit {
 

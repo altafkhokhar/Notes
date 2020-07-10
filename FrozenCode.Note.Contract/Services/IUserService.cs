@@ -7,7 +7,7 @@ namespace FrozenCode.Note.Contract.Services
 {
     public interface IUserService
     {
-            UserDTO Authenticate(ref UserDTO registeredUser);
+            UserDTO Authenticate(ref LoginUserDTO registeredUser);
             Task<List<UserDTO>> GetAll();
             Task<List<UserDTO>> Search(string searchText);
             bool TryRegister(ref RegisterUserDTO newUser);

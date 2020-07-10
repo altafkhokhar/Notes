@@ -16,8 +16,8 @@ namespace FrozenCode.Note.API.Controllers
     {
         protected int GetUserId()
         {
-            return 1;
-            //return Convert.ToInt32(User.Claims.Where(wh => wh.Type == ClaimTypes.Name).FirstOrDefault().Value);
+            //return 1;
+            return Convert.ToInt32(User.Claims.Where(wh => wh.Type == ClaimTypes.Name).FirstOrDefault().Value);
         }
         
     }

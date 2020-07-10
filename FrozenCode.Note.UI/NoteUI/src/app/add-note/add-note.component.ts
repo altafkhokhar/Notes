@@ -17,7 +17,8 @@ import { parse } from 'url';
 export class AddNoteComponent implements OnInit {
 
    noteId?: number;
-   noteForm = this.fb.group({
+    noteForm = this.fb.group({
+       Id : [0],
        Title: ['', Validators.required],
        Description: [''],
         Content: ['', Validators.required]
@@ -42,7 +43,12 @@ export class AddNoteComponent implements OnInit {
         };  
 
     onSubmit() {
-        
+
+        if (this.noteId > 0) {
+            this.noteForm.value.Id = this.noteId;
+        }
+
+       
         this.service.addNote(this.noteForm.value);
     }
 
@@ -50,5 +56,15 @@ export class AddNoteComponent implements OnInit {
         console.log(objNote.Title);
         this.noteForm.patchValue({ Title: objNote.title, Description: objNote.description, Content : objNote.content });
             
+    }
+
+    isInEditMode() {
+        
+        return this.noteId > 0 ? true : false;
+    }
+
+    unShareWithAll() {
+        this.service.unShareWithAll(this.noteId);
+
     }
 }

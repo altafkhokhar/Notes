@@ -29,9 +29,9 @@ namespace WebApi.Controllers
         }
 
         [AllowAnonymous]
-        [HttpPost("authenticate")] //  /users/authenticate
-
-        public IActionResult Authenticate([FromBody]UserDTO registerUser)
+        [HttpPost] //  /users/authenticate
+        [Route("Authenticate")]//
+        public IActionResult Authenticate([FromBody]LoginUserDTO registerUser)
         {
             var authenticatedUser =_userService.Authenticate(ref registerUser);
             
@@ -66,7 +66,7 @@ namespace WebApi.Controllers
             return Ok(users.Result);
         }
 
-        [AllowAnonymous] //todo
+        //[AllowAnonymous] //todo
         [HttpGet]
         [Route("Search")] //Users/Search
         public IActionResult Search([FromQuery] string searchText)

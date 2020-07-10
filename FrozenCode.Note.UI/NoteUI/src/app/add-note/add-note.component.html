@@ -30,8 +30,8 @@
 
   <br />
   <br />
-
-
+  <button *ngIf="this.isInEditMode()" type="button" (click)="unShareWithAll()">UnShare</button>
+  
 
 </form>
-<app-note-share noteId="{{noteId}}"></app-note-share>
+<app-note-share noteId="{{noteId}}" *ngIf="this.isInEditMode()"></app-note-share>

@@ -14,7 +14,7 @@ namespace FrozenCode.Note.API.Controllers
     public class NotesController : BaseController
     {
         private INoteService _noteService;
-        private readonly AppSettings _appSettings;
+        private readonly AppSettings _appSettings;  
 
         public NotesController( IOptions<AppSettings> appSettings)
         {
@@ -22,31 +22,39 @@ namespace FrozenCode.Note.API.Controllers
             _appSettings = appSettings.Value;
         }
 
-        [AllowAnonymous]
+        //[AllowAnonymous]
         [HttpPost]
         [Route("CreateNote")]//  api/notes/CreateNote
 
         public IActionResult CreateNote([FromBody]CreateNoteDTO newNote)
         {
-            string message = string.Empty;
+            string message = string.Empty, operationMessage = string.Empty; bool isSucceeded = false;
 
-            var isCreated = _noteService.TryCreateNote(ref newNote, GetUserId());
-
-            if (!isCreated)
-                return BadRequest(new { message = "Note is not created!" });
+            if (newNote.Id > 0)
+            {
+                isSucceeded = _noteService.Edit(newNote, GetUserId());
+                operationMessage = "Can not update note!";
+            }
+            else
+            {
+                isSucceeded = _noteService.TryCreateNote(ref newNote, GetUserId());
+                operationMessage = "Can not create a note!";
+            }
+            if (!isSucceeded)
+                return BadRequest(new { message = operationMessage});
 
             return Ok(true);
         }
 
 
-        [AllowAnonymous]
+        //[AllowAnonymous]
         [HttpPost]
         [Route("EditNote")]//  api/notes/EditNote
         public IActionResult EditNote([FromBody]CreateNoteDTO editNote)
         {
             string message = string.Empty;
 
-            var isUpdated = _noteService.Edit(ref editNote, GetUserId());
+            var isUpdated = _noteService.Edit(editNote, GetUserId());
 
             if (!isUpdated)
                 return BadRequest(new { message = "Cannot update a Note!" });
@@ -54,7 +62,7 @@ namespace FrozenCode.Note.API.Controllers
             return Ok(true);
         }
 
-        [AllowAnonymous]
+        //[AllowAnonymous]
         [HttpDelete]
         [Route("DeleteNote")]//  api/notes/DeleteNote
         public IActionResult DeleteNote([FromQuery]int noteId)
@@ -69,7 +77,7 @@ namespace FrozenCode.Note.API.Controllers
             return Ok(true);
         }
 
-        [AllowAnonymous]
+        //[AllowAnonymous]
         [HttpGet]
         [Route("GetNote")]//  api/notes/GetNote
         public IActionResult GetNote([FromQuery]int noteId)
@@ -84,20 +92,20 @@ namespace FrozenCode.Note.API.Controllers
             return Ok(readNote);
         }
 
-        [AllowAnonymous]
+       // [AllowAnonymous]
         [HttpGet]
         [Route("GetAllNotes")]//  api/notes/GetNote
         public IActionResult GetAllNotes()
         {
             string message = string.Empty;
 
-            var notes = _noteService.GetAll().Result;
+            var notes = _noteService.GetAll(GetUserId()).Result;
 
 
             return Ok(notes);
         }
 
-        [AllowAnonymous] //todo
+        //[AllowAnonymous] //todo
         [HttpPost]
         [Route("UpdateNoteRights")]//  api/notes/GetNote
         public IActionResult UpdateNoteRights([FromBody]UserNoteRightsDTO userNoteRightDTo)
@@ -105,6 +113,19 @@ namespace FrozenCode.Note.API.Controllers
             string message = string.Empty;
 
             var result = _noteService.UpdateNoteRightsForUser(userNoteRightDTo);
+
+
+            return Ok(result);
+        }
+
+        //[AllowAnonymous] //todo
+        [HttpPost]
+        [Route("UnShareWithAll")]//  api/notes/GetNote
+        public IActionResult UnShareWithAll([FromQuery]int noteId)
+        {
+            string message = string.Empty;
+
+            var result = _noteService.UnShareNoteWithAll(noteId, GetUserId());
 
 
             return Ok(result);

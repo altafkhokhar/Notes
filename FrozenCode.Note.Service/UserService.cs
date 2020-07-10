@@ -21,7 +21,7 @@ namespace FrozenCode.Note.Service
 
         }
 
-        public UserDTO Authenticate(ref UserDTO registeredUser)
+        public UserDTO Authenticate(ref LoginUserDTO registeredUser)
         {
             string userName = registeredUser.UserName, password = registeredUser.Password;
 

@@ -3,7 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { ActivatedRouteSnapshot, Router } from '@angular/router';
 
 import { iApiResult } from "../shared/iApiResult";
-import { NoteDetail, INoteDetail, User, IUser } from '../shared/note-detail.model';
+import { NoteDetail, INoteDetail, User, IUser, GridNoteDetail } from '../shared/note-detail.model';
 import { FormGroup } from '@angular/forms';
 
 
@@ -15,7 +15,7 @@ export class NoteService {
 
     readonly userRootURL = 'http://localhost:50210/api/Users/';
 
-    list: NoteDetail[];
+    list: GridNoteDetail[];
     result: iApiResult<NoteDetail[]>;
     
     constructor(private httpClient: HttpClient, private router: Router) {
@@ -27,9 +27,8 @@ export class NoteService {
         this.httpClient.get(this.rootURL + 'GetAllNotes')
             .toPromise().then
             (res => {
-
-                //this.result = res as EmployeeDetail[];
-                this.list = res as NoteDetail[];
+               
+                this.list = res as GridNoteDetail[];
                 //console.log(this.list);
             });
     }
@@ -44,7 +43,7 @@ export class NoteService {
     }
 
     addNote(noteDetail: INoteDetail) {
-        console.log(noteDetail);
+       
         this.httpClient.post(this.rootURL + 'CreateNote', noteDetail).toPromise()
             .then(res => {
                 this.refreshList();
@@ -60,7 +59,7 @@ export class NoteService {
     searchUsers(searchText: string): Promise<any> {
         return this.httpClient.get<any>(this.userRootURL + 'Search?searchText=' + searchText).toPromise<any>();
     }
-
+     
     getAllusers(): Promise<any> {
         return this.httpClient.get<any>(this.userRootURL + 'GetAllUsers').toPromise<any>();
     }
@@ -71,6 +70,15 @@ export class NoteService {
                
                 alert('Record Saved Successfully!');
                
+            })
+    }
+
+    unShareWithAll(noteId) {
+        this.httpClient.post(this.rootURL + 'UnShareWithAll?noteId='+noteId, null).toPromise()
+            .then(res => {
+
+                alert('Record Saved Successfully!');
+
             })
     }
 }

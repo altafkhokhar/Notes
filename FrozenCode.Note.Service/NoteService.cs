@@ -38,28 +38,49 @@ namespace FrozenCode.Note.Service
 
         }
 
-        public bool Edit(ref CreateNoteDTO note, int userId)
+        public bool Edit( CreateNoteDTO note, int userId)
         {
-            var noteTobeEdit = (from notes in context.Notes
-                                  join noteSharing in context.NoteSharing
-                                  on notes.Id equals noteSharing.NoteId
-                                  where noteSharing.UserId == userId && noteSharing.Edit
-                                  select notes).FirstOrDefault();
-
-            if (noteTobeEdit != null)
+            if (note.Id > 0)
             {
-                noteTobeEdit.Content = note.Content;
-                
-                context.SaveChangesAsync();
-                return true;
+                string title = note.Title.Trim().ToLowerInvariant();
+
+                var dbNote = context.Notes.Where(wh => wh.Title == title && wh.Id != note.Id).FirstOrDefault();
+                if (dbNote == null)
+                {
+                    var noteTobeEdit = (from notes in context.Notes
+                                        join noteSharing in context.NoteSharing
+                                        on notes.Id equals noteSharing.NoteId
+                                        where noteSharing.UserId == userId && noteSharing.Edit
+                                        select notes).FirstOrDefault();
+
+                    if (noteTobeEdit != null)
+                    {
+                        noteTobeEdit.Title = note.Title;
+                        noteTobeEdit.Description = note.Description;
+                        noteTobeEdit.Content = note.Content;
+
+                        context.SaveChangesAsync();
+                        return true;
+                    }
+                }
             }
 
             return false;
         }
 
-        public Task<List<NoteDTO>> GetAll()
+        public Task<List<GridNoteDetailDTO>> GetAll(int userId)
         {
-            var result =  context.Notes.Select(sel => new NoteDTO {Id = sel.Id, Title = sel.Title, Description = sel.Description, Content = sel.Content }).ToListAsync();
+            //var result =  context.Notes.Select(sel => new NoteDTO {Id = sel.Id, Title = sel.Title, Description = sel.Description, Content = sel.Content }).ToListAsync();
+            var result =
+                (from notes in context.Notes
+                 join noteSharing in context.NoteSharing
+                 on notes.Id equals noteSharing.NoteId
+                 where (noteSharing.UserId == userId && (noteSharing.Read || noteSharing.Edit || noteSharing.Delete || noteSharing.Share))  
+                 select new GridNoteDetailDTO { Id = notes.Id, Title = notes.Title, Content = notes.Content, Description = notes.Description, 
+                            CanShare= noteSharing.Edit 
+                            , CanRead = noteSharing.Read
+                            , CanDelete = noteSharing.Delete
+                            , CanEdit = noteSharing.Edit} ).Distinct().ToListAsync();
             return result;
         }
 
@@ -85,7 +106,7 @@ namespace FrozenCode.Note.Service
             {
                 string title = newNote.Title.Trim().ToLowerInvariant();
 
-                if (context.Notes.FirstOrDefault(x => x.Title.ToLowerInvariant() == title) != null)
+                if (context.Notes.FirstOrDefault(x => x.Title.ToLowerInvariant() == title ) != null)
                 {
                     return false;
                 }
@@ -104,22 +125,57 @@ namespace FrozenCode.Note.Service
             return true;
         }
 
+
+        
+
+        public bool UnShareNoteWithAll(int noteId, int userId)
+        {
+            var note = context.Notes.Where(wh => wh.Id == noteId && wh.CreatedBy == userId).FirstOrDefault();
+            if (note == null)
+                return false;
+
+            try
+            {
+                var noteShared = context.NoteSharing.Where(wh => wh.NoteId == noteId).ToList();
+                context.NoteSharing.RemoveRange(noteShared);
+                context.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+
+            return true;
+        }
+
         public bool UpdateNoteRightsForUser(UserNoteRightsDTO userNoteRight)
         {
             var noteRights = context.NoteSharing.Where(wh => wh.NoteId == userNoteRight.NoteId && wh.UserId == userNoteRight.UserId).FirstOrDefault();
             if (noteRights != null)
             {
-               
-                    noteRights.Share = userNoteRight.CanShare;
-                noteRights.Delete = userNoteRight.CanDelete;                
-                    noteRights.Edit = userNoteRight.CanEdit;
-                    noteRights.Read = userNoteRight.CanRead;
+
+                noteRights.Share = userNoteRight.CanShare;
+                noteRights.Delete = userNoteRight.CanDelete;
+                noteRights.Edit = userNoteRight.CanEdit;
+                noteRights.Read = userNoteRight.CanRead;
 
                 context.SaveChangesAsync();
                 return true;
             }
+            else
+            {
+                context.NoteSharing.Add(new NoteSharing
+                {
+                    NoteId = userNoteRight.NoteId,
+                    UserId = userNoteRight.UserId,
+                    Delete = userNoteRight.CanDelete,
+                    Edit = userNoteRight.CanEdit,
+                    Read = userNoteRight.CanRead,
+                    Share = userNoteRight.CanShare
+                });
+                context.SaveChanges();
 
-            
+            }
 
             return false;
 
